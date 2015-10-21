@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de Alunos</title>
+</head>
+<body>	
+	<div class="container"> 
+
+	<form name="formAssuntos">		
+		<div class="col-md-4"></div>
+		<div class="col-md-4">  
+		<legend><H5>Novo aluno</H5></legend>
+  		<fieldset>  		
+  		<div class="form-group">
+  			<label>Turma</label>			
+  			 <select name="turma" ng-model="aluno.idTurma" class="form-control">  			
+	         <option value="{{turma.id}}" ng-repeat="turma in listaTurmas">
+	         {{turma.codigo}}
+	         </option>
+	     	</select>
+		</div>		
+		<div class="form-group">
+  			<label>Matrícula</label>			
+  			 <input type="text" class="form-control" ng-model="aluno.matricula">			
+		</div>		
+		<div class="form-group">
+  			<label>Nome</label>			
+  			 <input type="text" class="form-control" ng-model="aluno.nome">			
+		</div>			
+		</fieldset>
+			<button ng-click="adicionarAluno()" class="btn btn-primary">Adicionar</span></button>
+        </div>
+                
+	</form>
+
+	</div>	
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de Assuntos</title>
+</head>
+<body>	
+	<div class="container"> 
+
+	<form name="formAssuntos">		
+
+		<div class="col-md-4">  
+		<legend><H5>Novo assunto</H5></legend>
+  		<fieldset>  		
+  		<div class="form-group">
+  			<label>Disciplina</label>			
+  			 <select name="disciplina" ng-model="assunto.idDisciplina" class="form-control">  			
+	         <option value="{{disciplina.id}}" ng-repeat="disciplina in listaDisciplinas">
+	         {{disciplina.codigo}} - {{disciplina.nome}}
+	         </option>
+	     	</select>
+		</div>		
+		<div class="form-group">
+  			<label>Descrição</label>			
+  			 <input type="text" class="form-control" ng-model="assunto.descricao">			
+		</div>				
+		</fieldset>
+
+			<button ng-click="adicionarAssunto()" class="btn btn-primary">Adicionar</span></button>
+        </div>
+                
+	</form>
+
+	</div>	
+</body>
+
+</html>

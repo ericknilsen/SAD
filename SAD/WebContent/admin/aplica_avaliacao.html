@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Aplicação de Avaliação</title>
+</head>
+<body>	
+	<div class="container"> 
+
+	<form name="formAvaliacao">		
+		<div class="col-md-2"></div>
+
+		<div class="col-md-8" >  
+		<legend><H5>Questões</H5></legend>
+  		<fieldset>  		
+  		<div class="form-group" ng-repeat="questao in avaliacao.listaQuestoes">
+  			<label>Enunciado</label>			  			 
+	         {{questao.enunciado}}
+
+	         <div class="form-group" ng-repeat="alternativa in questao.listaAlternativas">
+	         	<input type="radio" name="{{questao.id}}" value="{{alternativa.id}}" ng-model="questao.idAlternativaResposta">
+	        	<label>(A)</label>
+	         	{{alternativa.sentenca}}
+	         </div>
+	        
+		</div>		
+		
+		</fieldset>
+			<button ng-click="responderAvaliacao()" class="btn btn-primary">Responder</span></button>
+        </div>
+                
+	</form>
+
+	</div>	
+</body>
+
+</html>

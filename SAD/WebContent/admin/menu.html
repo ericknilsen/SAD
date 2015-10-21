@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt" ng-app="sad">
+<head>
+<meta charset="UTF-8">
+<title>SAD</title>
+
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"> </script>
+<script src="js/main.js"></script>
+<script src="js/controller/QuestaoController.js"></script>
+<script src="js/controller/DisciplinaController.js"></script>
+<script src="js/controller/AssuntoController.js"></script>
+<script src="js/controller/TurmaController.js"></script>
+<script src="js/controller/AlunoController.js"></script>
+<script src="js/controller/AvaliacaoController.js"></script>
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="bs-example">
+    <nav id="myNavbar" class="navbar navbar-default" role="navigation">     
+        <div class="container">                  
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" >
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="" data-toggle="dropdown" class="dropdown-toggle">Turma <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/cadastro_turma">Cadastro</a></li>
+                            <li><a href="#/busca_turma">Busca</a></li>                                                      
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" data-toggle="dropdown" class="dropdown-toggle">Aluno <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/cadastro_aluno">Cadastro</a></li>
+                            <li><a href="#/busca_aluno">Busca</a></li>                                                      
+                        </ul>
+                    </li>
+                    <li><a href="#/cadastro_disciplina">Disciplina</a></li>                    
+                    <li class="dropdown">
+                        <a href="" data-toggle="dropdown" class="dropdown-toggle">Assunto <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/cadastro_assunto">Cadastro</a></li>
+                            <li><a href="#/busca_assunto">Busca</a></li>                                                      
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" data-toggle="dropdown" class="dropdown-toggle">Questao <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/cadastro_questao">Cadastro</a></li>
+                            <li><a href="#/busca_questao">Busca</a></li>                                                      
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="" data-toggle="dropdown" class="dropdown-toggle">Avaliação <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#/cadastro_avaliacao">Cadastro</a></li>
+                            <li><a href="#/busca_avaliacao">Busca</a></li>
+                            <li><a href="#/lista_avaliacao">Listagem</a></li>                                                      
+                            <li><a href="#/aplica_avaliacao">Aplicação</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="" data-toggle="dropdown" class="dropdown-toggle">Admin <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Perfil</a></li>                            
+                            <li class="divider"></li>
+                            <li><a href="#">Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <div ng-view></div>
+</div>
+
+</body>
+</html>                                     

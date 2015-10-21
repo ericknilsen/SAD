@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de Questões</title>
+</head>
+<body>	
+	<div class="container"> 
+	<form name="formQuestoes">
+		<legend><H5>Dados da questão</H5></legend>
+
+		<div class="col-md-12"> 
+		<div class="form-group">
+  			<label>Enunciado</label>			
+			<textarea rows="4" class="form-control" ng-model="questao.enunciado" required> </textarea>
+		</div>
+		</div> 
+
+		<div class="col-md-4">  
+  		<fieldset>  		
+  		
+	
+		<div class="form-group">
+  			<label>Gabarito </label>  						
+  			<select name="gabarito" ng-model="questao.gabarito" class="form-control">  			
+	         <option value="A">Alternativa A</option>
+	         <option value="B">Alternativa B</option>
+	         <option value="C">Alternativa C</option>
+	         <option value="D">Alternativa D</option>
+	         <option value="E">Alternativa E</option>
+	     	</select>
+  		</div>
+
+  		<div class="form-group">
+  			<label>Disciplina </label>  						
+  			<select name="disciplina" ng-model="questao.idDisciplina" class="form-control" ng-change="buscarAssuntosPorDisciplina()">  	
+	         <option value="{{disciplina.id}}" ng-repeat="disciplina in listaDisciplinas">
+	         	{{disciplina.codigo}} - {{disciplina.nome}}
+	         </option>
+	     	</select>
+  		</div>
+
+        <table class="table table-condensed">
+		<thead>
+			<tr>				
+				<th>Assuntos</th>				
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="assunto in listaAssuntos">			
+				<td>					
+					<input type="checkbox" ng-model="assunto.checked" ng-checked="assunto.checked" value="{{assunto.id}}">
+					{{assunto.descricao}}  
+				</td>				
+			</tr>
+		</tbody>
+		</table> 
+
+
+
+  		<div class="col-md-6"></div>  		
+
+		</fieldset>
+        </div>
+
+        <div class="col-md-4">         
+  		<fieldset>
+		<div class="form-group">
+  			<label>Alternativa A </label>  			
+			<textarea class="form-control" ng-model="alternativaA.sentenca"> </textarea>						
+  		</div>
+		<div class="form-group">
+  			<label>Alternativa B</label>
+			<textarea class="form-control" ng-model="alternativaB.sentenca"> </textarea>
+		</div>
+		<div class="form-group">
+  			<label>Alternativa C</label>
+			<textarea class="form-control" ng-model="alternativaC.sentenca"> </textarea>
+		</div>
+		<div class="form-group">
+  			<label>Alternativa D</label>
+			<textarea class="form-control" ng-model="alternativaD.sentenca"> </textarea>
+		</div>
+		<div class="form-group">
+  			<label>Alternativa E</label>
+			<textarea class="form-control" ng-model="alternativaE.sentenca"> </textarea>
+		</div>				
+		</fieldset>		
+        </div>     			       
+
+
+        <div class="col-md-4">  
+  		<fieldset>
+
+		<div class="form-group">
+  			<label>Justificativa A</label>
+			<textarea class="form-control" ng-model="alternativaA.justificativa"> </textarea>
+		</div>
+		<div class="form-group">
+  			<label>Justificativa B</label>
+			<textarea class="form-control" ng-model="alternativaB.justificativa"> </textarea>
+		</div>
+		<div class="form-group">
+  			<label>Justificativa C</label>
+			<textarea class="form-control" ng-model="alternativaC.justificativa"> </textarea>
+		</div>
+		<div class="form-group">
+  			<label>Justificativa D</label>
+			<textarea class="form-control" ng-model="alternativaD.justificativa"> </textarea>
+		</div>
+		<div class="form-group">
+  			<label>Justificativa E</label>
+			<textarea class="form-control" ng-model="alternativaE.justificativa"> </textarea>
+		</div>		
+
+		</fieldset>
+        </div> 
+
+        <div class="col-md-11"></div>      
+        <div class="col-md-1"> 
+        <button ng-click="gravarQuestao()" class="btn btn-primary">Gravar</button>        
+        </div>              
+	</form>
+
+	</div>
+	<br><br>
+
+	
+</body>
+
+</html>

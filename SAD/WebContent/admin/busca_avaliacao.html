@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Busca de Avaliações</title>
+</head>
+<body>	
+	<div class="container"> 
+
+	<form name="formAvaliacoes">		
+
+		<div class="col-md-4">  
+		<legend><H5>Dados da avaliação</H5></legend>
+  		<fieldset>  		
+  		<div class="form-group">
+  			<label>Turma</label>			
+  			 <select name="turma" ng-model="avaliacao.idTurma" class="form-control" ng-change="buscarAvaliacoesPorTurma()">  		
+	         <option value="{{turma.id}}" ng-repeat="turma in listaTurmas">
+	         {{turma.codigo}}
+	         </option>
+	     	</select>
+		</div>				
+		</fieldset>			
+        </div>
+
+        <div class="col-md-1"></div>
+
+        <div class="col-md-5">
+        <legend><H5>Avaliações cadastradas</H5></legend>
+  
+
+        <table class="table table-condensed">
+		<thead>
+			<tr>				
+				<th>Data de criação</th>				
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="avaliacao in listaAvaliacoes">							
+				<td>					
+					<a href="#/detalhe_avaliacao?id={{avaliacao.id}}">{{avaliacao.dataCriacao}}</a>					
+				</td>
+
+				<td>
+					<select name="status" ng-model="avaliacao.status" class="form-control input-sm">
+	         		<option value="{{s.codigo}}" ng-selected="{{s.codigo==avaliacao.status}}" ng-repeat="s in listaStatus">
+	         		{{s.descricao}}
+	         		</option>
+	     			</select>
+				</td>
+
+				<td>
+					<button ng-click="alterarAvaliacao(avaliacao)" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-ok"></span></button>					
+					<button ng-click="removerAvaliacao(avaliacao)" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-remove"></span></button>					
+				</td>
+			</tr>
+		</tbody>
+		</table> 	
+  		
+        </div>             
+        
+	</form>
+
+	</div>	
+</body>
+
+</html>

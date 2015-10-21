@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Aplicação de Avaliação</title>
+</head>
+<body>	
+	<div class="container"> 
+
+	<form name="formAvaliacao">		
+		<div class="col-md-2"></div>
+
+		<div class="col-md-8" >  
+		<legend><H5>Questões</H5></legend>
+  		<fieldset>  		
+  		<div class="form-group" ng-repeat="questao in avaliacao.listaQuestoes">
+  			<label>{{avaliacao.listaQuestoes.indexOf(questao)+1}}ª Questão:</label>			  			 
+	         <p class="text-justify" ng-bind-html="questao.enunciado"></p>
+
+	         <div class="form-group" ng-repeat="alternativa in questao.listaAlternativas">
+	         	<p class="text-justify">
+	         	<input type="radio" name="{{questao.id}}" disabled="true" value="{{alternativa.id}}" ng-model="questao.idAlternativaResposta">
+
+	         	<!--	
+   	        	<label class='label label-default' ng-class="{'label label-success': alternativa.letra == questao.gabarito, 
+   	        	'label label-danger': alternativa.id == questao.idAlternativaResposta && alternativa.letra != questao.gabarito}">({{alternativa.letra}})</label>
+	         	{{alternativa.sentenca}} 	         		         	
+	         	-->
+	         	<strong>({{alternativa.letra}})</strong> {{alternativa.sentenca}} </p>
+
+	         	<div>
+	         		<label ng-class="{'alert alert-success': alternativa.letra == questao.gabarito,'alert alert-danger': alternativa.letra != questao.gabarito}">
+	         		<p class="text-justify"> {{alternativa.justificativa}} </p>	         	         		
+	         		</label>
+	         	</div>
+
+	         	
+	         </div>
+
+	         <hr>
+	        
+		</div>		
+		
+		</fieldset>
+			
+        </div>
+                
+	</form>
+
+	</div>	
+</body>
+
+</html>
