@@ -85,9 +85,9 @@ public class AlunoResource {
 	@Path("m/{matricula}")
 	@GET
 	@Produces("application/json")
-	public Collection<AlunoVO> buscaAlunoPorMatricula(@PathParam("matricula") String matricula) {						
+	public AlunoVO buscaAlunoPorMatricula(@PathParam("matricula") String matricula) {						
 						
-		return this.montaListaAlunosVO(alunoBean.buscarAlunoPorMatricula(matricula));
+		return this.montaAlunoVO(alunoBean.buscarAlunoPorMatricula(matricula));
 	}	
 	
 	@GET
