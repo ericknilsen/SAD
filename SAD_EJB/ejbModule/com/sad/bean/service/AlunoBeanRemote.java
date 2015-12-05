@@ -19,7 +19,7 @@ public interface AlunoBeanRemote {
 
 	List<Aluno> buscarAlunosPorTurma(Long idTurma);
 
-	List<Aluno> buscarAlunoPorMatricula(String matricula);
+	Aluno buscarAlunoPorMatricula(String matricula);
 
 	Aluno buscar(Long id);
 	

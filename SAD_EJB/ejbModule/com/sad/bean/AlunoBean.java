@@ -50,7 +50,7 @@ public class AlunoBean implements AlunoBeanRemote {
 	}
 
 	@Override
-	public List<Aluno> buscarAlunoPorMatricula(String matricula) {
+	public Aluno buscarAlunoPorMatricula(String matricula) {
 
 		return alunoDAO.buscarAlunoPorMatricula(matricula);
 	}
