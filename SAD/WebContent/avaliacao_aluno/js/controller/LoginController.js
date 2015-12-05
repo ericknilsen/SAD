@@ -1,15 +1,13 @@
 app.controller('LoginController', function($scope, $http, $cookies, $rootScope, $sce) {
 
-
-	$scope.aluno = {};	
-	
+	$scope.aluno = {};
 
 	$scope.verificarCredenciais = function() {	
 		
 		$http.get('http://'+$rootScope.ip+':8080/SAD/rest/alunos/m/'+$scope.aluno.matricula).success(
 			function(dados) {					
 				if(dados != null) {					
-					$scope.aluno = dados.alunoVO;											
+					$scope.aluno = dados;					
 					$scope.buscaAvaliacaoAtualPorTurmaAluno();				
 				} else {					
 					alert('Aluno não cadastrado');						
@@ -21,7 +19,6 @@ app.controller('LoginController', function($scope, $http, $cookies, $rootScope, 
 	
 
 	$scope.buscaAvaliacaoAtualPorTurmaAluno = function() {
-
 				
 		$http.get('http://'+$rootScope.ip+':8080/SAD/rest/avaliacoes/turma_aluno/'+$scope.aluno.idTurma).success(
 			function(dados) {					

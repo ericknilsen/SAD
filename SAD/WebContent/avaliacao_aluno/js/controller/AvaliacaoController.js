@@ -52,10 +52,7 @@ app.controller('AvaliacaoController', function($scope, $http, $location, $cookie
 				
 		$http.get('http://'+$rootScope.ip+':8080/SAD/rest/avaliacoes/t/'+$scope.aluno.idTurma+'/'+$scope.aluno.id).success(
 			function(dados) {				
-				if(Array.isArray(dados.avaliacaoVO))				
-					$scope.listaAvaliacoes = dados.avaliacaoVO;			
-				else
-					$scope.listaAvaliacoes.push(dados.avaliacaoVO);				
+				$scope.listaAvaliacoes = dados;			
 			}
 		);
 		
@@ -65,18 +62,12 @@ app.controller('AvaliacaoController', function($scope, $http, $location, $cookie
 				
 		$http.post('http://'+$rootScope.ip+':8080/SAD/rest/questoes/questoes_avaliacao/',$scope.avaliacao).success(
 			function(dados) {					
-				if(dados != null) {	
-					lQuestoes = [];
-					if(Array.isArray(dados.questaoVO))				
-						lQuestoes = dados.questaoVO;				
-					else
-						lQuestoes.push(dados.questaoVO);																	
-						
+				if(dados != null) {						
+					lQuestoes = dados;					
 					$scope.avaliacao.listaQuestoes = lQuestoes;
 					
 					if(lQuestoes[0].idAlternativaResposta != null)
 						$scope.avaliacaoRespondida = true;
-
 
 					for (var i = 0; i < $scope.avaliacao.listaQuestoes.length; i++) {						
 						var enunciado = $scope.avaliacao.listaQuestoes[i].enunciado;
