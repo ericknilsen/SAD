@@ -76,10 +76,10 @@ public class AlunoDAO {
 	}
 
 
-	public List<Aluno> buscarAlunoPorMatricula(String matricula) {
+	public Aluno buscarAlunoPorMatricula(String matricula) {
 		String query = "SELECT a FROM Aluno a WHERE a.matricula='"+matricula+"'";		
 		
-		return manager.createQuery(query).getResultList();
+		return (Aluno) manager.createQuery(query).getSingleResult();
 	}
 
 
