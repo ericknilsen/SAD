@@ -8,10 +8,7 @@ app.controller('AlunoController', function($scope, $http) {
 
 	$http.get('http://localhost:8080/SAD/rest/turmas').success(
 			function(dados) {				
-				if(Array.isArray(dados.turmaVO))				
-					$scope.listaTurmas = dados.turmaVO;			
-				else
-					$scope.listaTurmas.push(dados.turmaVO);	
+				$scope.listaTurmas = dados;					
 		}
 	);
 
@@ -42,16 +39,8 @@ app.controller('AlunoController', function($scope, $http) {
 	};
 
 	$scope.alterarAluno = function(aluno) {
-
-		var alunoSelecionado = null;
-						
-		for (var i = 0; i < $scope.listaAlunos.length; i++) {			
-			if ($scope.listaAlunos[i].id == aluno.id) {
-				alunoSelecionado = aluno;
-			};
-		};	
-			
-		$http.put('http://localhost:8080/SAD/rest/alunos', alunoSelecionado).success(
+					
+		$http.put('http://localhost:8080/SAD/rest/alunos', aluno).success(
 			function(dados) {									
 				alert(dados);	
 				$scope.buscarAlunosPorTurma();
@@ -65,10 +54,7 @@ app.controller('AlunoController', function($scope, $http) {
 		$scope.listaAlunos = [];
 		$http.get('http://localhost:8080/SAD/rest/alunos').success(
 			function(dados) {				
-				if(Array.isArray(dados.alunoVO))				
-					$scope.listaAlunos = dados.alunoVO;			
-				else
-					$scope.listaAlunos.push(dados.alunoVO);				
+				$scope.listaAlunos = dados;
 			}
 		);
 		
@@ -80,12 +66,7 @@ app.controller('AlunoController', function($scope, $http) {
 		$scope.listaAlunos = [];
 		$http.get('http://localhost:8080/SAD/rest/alunos/t/'+$scope.aluno.idTurma).success(
 			function(dados) {					
-				if(dados != null) {		
-					if(Array.isArray(dados.alunoVO))				
-						$scope.listaAlunos = dados.alunoVO;				
-					else
-						$scope.listaAlunos.push(dados.alunoVO);												
-				}
+				$scope.listaAlunos = dados;
 			}
 		);	
 	};

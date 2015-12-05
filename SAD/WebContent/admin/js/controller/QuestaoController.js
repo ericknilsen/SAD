@@ -16,10 +16,7 @@ app.controller('QuestaoController', function($scope, $http, $location) {
 
 	$http.get('http://localhost:8080/SAD/rest/disciplinas').success(
 		function(dados) {				
-			if(Array.isArray(dados.disciplinaVO))				
-				$scope.listaDisciplinas = dados.disciplinaVO;			
-			else
-				$scope.listaDisciplinas.push(dados.disciplinaVO);
+			$scope.listaDisciplinas = dados;			
 		}
 	);
 
@@ -64,8 +61,7 @@ app.controller('QuestaoController', function($scope, $http, $location) {
 			if($scope.listaAssuntos[i].checked) { 				
 				$scope.questao.listaAssuntos.push($scope.listaAssuntos[i]);			
 			}	
-		};
-   		
+		};   		
    		
 		$http.post('http://localhost:8080/SAD/rest/questoes', $scope.questao).success(
 			function(dados) {
@@ -88,27 +84,17 @@ app.controller('QuestaoController', function($scope, $http, $location) {
 		$scope.listaAssuntos = [];		
 		$http.get('http://localhost:8080/SAD/rest/assuntos/d/'+$scope.questao.idDisciplina).success(
 			function(dados) {					
-				if(dados != null) {		
-					if(Array.isArray(dados.assuntoVO))				
-						$scope.listaAssuntos = dados.assuntoVO;				
-					else
-						$scope.listaAssuntos.push(dados.assuntoVO);	
-
+					$scope.listaAssuntos = dados;				
+					
 					if($scope.questao.listaAssuntos != null) {	
 
-						listaAssuntosSelecionados = [];
-						if(Array.isArray($scope.questao.listaAssuntos))				
-							listaAssuntosSelecionados = $scope.questao.listaAssuntos;				
-						else
-							listaAssuntosSelecionados.push($scope.questao.listaAssuntos);	
+						listaAssuntosSelecionados = $scope.questao.listaAssuntos;						
 
 						for (var i = 0; i < $scope.listaAssuntos.length; i++) 
 							for (var j = 0; j < listaAssuntosSelecionados.length; j++) 
 								if(listaAssuntosSelecionados[j].id == $scope.listaAssuntos[i].id)
 									$scope.listaAssuntos[i].checked = true;						 
-					}
-																	
-				}								
+					}											
 			}
 		);	
 	};
@@ -116,13 +102,8 @@ app.controller('QuestaoController', function($scope, $http, $location) {
 	$scope.buscarQuestoesPorDisciplina = function() {
 		$scope.listaQuestoes = [];
 		$http.get('http://localhost:8080/SAD/rest/questoes/d/'+$scope.questao.idDisciplina).success(
-			function(dados) {					
-				if(dados != null) {						
-					if(Array.isArray(dados.questaoVO))				
-						$scope.listaQuestoes = dados.questaoVO;				
-					else
-						$scope.listaQuestoes.push(dados.questaoVO);												
-				}
+			function(dados) {						
+				$scope.listaQuestoes = dados;			
 			}
 		);
 		$scope.buscarAssuntosPorDisciplina();
@@ -142,13 +123,8 @@ app.controller('QuestaoController', function($scope, $http, $location) {
 		if($scope.questao.listaAssuntos.length > 0) {
 
 			$http.post('http://localhost:8080/SAD/rest/questoes/a', $scope.questao).success(
-				function(dados) {				
-					if(dados != null) {							
-						if(Array.isArray(dados.questaoVO))				
-							$scope.listaQuestoes = dados.questaoVO;				
-						else
-							$scope.listaQuestoes.push(dados.questaoVO);												
-					}			
+				function(dados) {	
+					$scope.listaQuestoes = dados;
   				}
   			);
   		}	

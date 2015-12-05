@@ -1,7 +1,7 @@
 app.controller('TurmaController', function($scope, $http) {
 
 	$scope.turma = {};	
-	$scope.turma.listaTurmas = [];
+	
 	$scope.listaDisciplinas = [];
 	$scope.listaSemestres = [
 							 {semestre:"2015.2"},
@@ -11,12 +11,10 @@ app.controller('TurmaController', function($scope, $http) {
 	
 
 	$http.get('http://localhost:8080/SAD/rest/disciplinas').success(
-			function(dados) {				
-				if(Array.isArray(dados.disciplinaVO))				
-					$scope.listaDisciplinas = dados.disciplinaVO;			
-				else
-					$scope.listaDisciplinas.push(dados.disciplinaVO);
-		}
+			function(dados) {								
+				$scope.listaDisciplinas = dados;			
+				
+			}
 	);
 
 
@@ -45,16 +43,8 @@ app.controller('TurmaController', function($scope, $http) {
 	};
 
 	$scope.alterarTurma = function(turma) {
-
-		var turmaSelecionada = null;
-						
-		for (var i = 0; i < $scope.listaTurmas.length; i++) {			
-			if ($scope.listaTurmas[i].id == turma.id) {
-				turmaSelecionada = turma;
-			};
-		};	
 			
-		$http.put('http://localhost:8080/SAD/rest/turmas', turmaSelecionada).success(
+		$http.put('http://localhost:8080/SAD/rest/turmas', turma).success(
 			function(dados) {									
 				alert(dados);	
 				$scope.buscarTurmasPorSemestreDisciplina();
@@ -67,11 +57,8 @@ app.controller('TurmaController', function($scope, $http) {
 
 		$scope.listaTurmas = [];
 		$http.get('http://localhost:8080/SAD/rest/turmas').success(
-			function(dados) {				
-				if(Array.isArray(dados.turmaVO))				
-					$scope.listaTurmas = dados.turmaVO;			
-				else
-					$scope.listaTurmas.push(dados.turmaVO);				
+			function(dados) {					
+				$scope.listaTurmas = dados;								
 			}
 		);
 		
@@ -82,13 +69,8 @@ app.controller('TurmaController', function($scope, $http) {
 
 		$scope.listaTurmas = [];		
 		$http.post('http://localhost:8080/SAD/rest/turmas/t/', $scope.turma).success(
-			function(dados) {					
-				if(dados != null) {		
-					if(Array.isArray(dados.turmaVO))				
-						$scope.listaTurmas = dados.turmaVO;				
-					else
-						$scope.listaTurmas.push(dados.turmaVO);												
-				}
+			function(dados) {							
+				$scope.listaTurmas = dados;				
 			}
 		);	
 	};

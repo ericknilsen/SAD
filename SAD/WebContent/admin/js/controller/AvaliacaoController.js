@@ -16,10 +16,7 @@ app.controller('AvaliacaoController', function($scope, $http, $location) {
 
 	$http.get('http://localhost:8080/SAD/rest/turmas').success(
 		function(dados) {				
-			if(Array.isArray(dados.turmaVO))				
-				$scope.listaTurmas = dados.turmaVO;			
-			else
-				$scope.listaTurmas.push(dados.turmaVO);	
+			$scope.listaTurmas = dados;			
 		}
 	);
 
@@ -27,21 +24,16 @@ app.controller('AvaliacaoController', function($scope, $http, $location) {
 				
 		$http.get('http://localhost:8080/SAD/rest/questoes/a/'+$location.search().id).success(		
 			function(dados) {					
-				if(dados != null) {		
-					if(Array.isArray(dados.questaoVO))				
-						$scope.avaliacao.listaQuestoes = dados.questaoVO;				
-					else
-						$scope.avaliacao.listaQuestoes.push(dados.questaoVO);																	
-				}								
+				$scope.avaliacao.listaQuestoes = dados;
 			}
 		);
 			
 	};
 
-	if($location.search().id) {
-		$scope.avaliacao.id = $location.search().id;
-		$scope.buscarQuestoesPorAvaliacao();
-	}
+//	if($location.search().id) {
+//		$scope.avaliacao.id = $location.search().id;
+//		$scope.buscarQuestoesPorAvaliacao();
+//	}
 
 	$scope.buscarAssuntosPorTurma = function() {
 		
@@ -49,12 +41,7 @@ app.controller('AvaliacaoController', function($scope, $http, $location) {
 		
 		$http.get('http://localhost:8080/SAD/rest/assuntos/t/'+$scope.avaliacao.idTurma).success(
 			function(dados) {					
-				if(dados != null) {		
-					if(Array.isArray(dados.assuntoVO))				
-						$scope.listaAssuntos = dados.assuntoVO;				
-					else
-						$scope.listaAssuntos.push(dados.assuntoVO);																	
-				}								
+				$scope.listaAssuntos = dados;												
 			}
 		);	
 	};
@@ -98,10 +85,7 @@ app.controller('AvaliacaoController', function($scope, $http, $location) {
 		$scope.listaAvaliacoes = [];
 		$http.get('http://localhost:8080/SAD/rest/avaliacoes').success(
 			function(dados) {				
-				if(Array.isArray(dados.avaliacaoVO))				
-					$scope.listaAvaliacoes = dados.avaliacaoVO;			
-				else
-					$scope.listaAvaliacoes.push(dados.avaliacaoVO);				
+				$scope.listaAvaliacoes = dados;
 			}
 		);
 		
@@ -113,12 +97,7 @@ app.controller('AvaliacaoController', function($scope, $http, $location) {
 		$scope.listaAvaliacoes = [];
 		$http.get('http://localhost:8080/SAD/rest/avaliacoes/t/'+$scope.avaliacao.idTurma).success(
 			function(dados) {					
-				if(dados != null) {		
-					if(Array.isArray(dados.avaliacaoVO))				
-						$scope.listaAvaliacoes = dados.avaliacaoVO;				
-					else
-						$scope.listaAvaliacoes.push(dados.avaliacaoVO);												
-				}
+				$scope.listaAvaliacoes = dados;			
 			}
 		);	
 	};
@@ -147,12 +126,7 @@ app.controller('AvaliacaoController', function($scope, $http, $location) {
 			$scope.avaliacao.listaQuestoes = [];
 			$http.post('http://localhost:8080/SAD/rest/questoes/a', $scope.questao).success(
 				function(dados) {				
-					if(dados != null) {							
-						if(Array.isArray(dados.questaoVO))				
-							$scope.avaliacao.listaQuestoes = dados.questaoVO;											
-						else
-							$scope.avaliacao.listaQuestoes.push(dados.questaoVO);																		
-					}			
+					$scope.avaliacao.listaQuestoes = dados;											
   				}
   			);
   		}	

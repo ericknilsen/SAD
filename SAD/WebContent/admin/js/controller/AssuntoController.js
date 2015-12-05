@@ -5,18 +5,12 @@ app.controller('AssuntoController', function($scope, $http) {
 
 	$scope.listaDisciplinas = [];
 	
-
 	$http.get('http://localhost:8080/SAD/rest/disciplinas').success(
-			function(dados) {				
-				if(Array.isArray(dados.disciplinaVO))				
-					$scope.listaDisciplinas = dados.disciplinaVO;			
-				else
-					$scope.listaDisciplinas.push(dados.disciplinaVO);
+		function(dados) {				
+			$scope.listaDisciplinas = dados;				
 		}
 	);
-
-
-
+	
 	$scope.adicionarAssunto = function() {		
 		
 		$http.post('http://localhost:8080/SAD/rest/assuntos', $scope.assunto).success(
@@ -41,16 +35,8 @@ app.controller('AssuntoController', function($scope, $http) {
 	};
 
 	$scope.alterarAssunto = function(assunto) {
-
-		var assuntoSelecionado = null;
-						
-		for (var i = 0; i < $scope.listaAssuntos.length; i++) {			
-			if ($scope.listaAssuntos[i].id == assunto.id) {
-				assuntoSelecionado = assunto;
-			};
-		};	
 			
-		$http.put('http://localhost:8080/SAD/rest/assuntos', assuntoSelecionado).success(
+		$http.put('http://localhost:8080/SAD/rest/assuntos', assunto).success(
 			function(dados) {									
 				alert(dados);	
 				$scope.buscarAssuntosPorDisciplina();
@@ -64,10 +50,7 @@ app.controller('AssuntoController', function($scope, $http) {
 		$scope.listaAssuntos = [];
 		$http.get('http://localhost:8080/SAD/rest/assuntos').success(
 			function(dados) {				
-				if(Array.isArray(dados.assuntoVO))				
-					$scope.listaAssuntos = dados.assuntoVO;			
-				else
-					$scope.listaAssuntos.push(dados.assuntoVO);				
+				$scope.listaAssuntos = dados;								
 			}
 		);
 		
@@ -79,11 +62,8 @@ app.controller('AssuntoController', function($scope, $http) {
 		$scope.listaAssuntos = [];
 		$http.get('http://localhost:8080/SAD/rest/assuntos/d/'+$scope.assunto.idDisciplina).success(
 			function(dados) {					
-				if(dados != null) {		
-					if(Array.isArray(dados.assuntoVO))				
-						$scope.listaAssuntos = dados.assuntoVO;				
-					else
-						$scope.listaAssuntos.push(dados.assuntoVO);												
+				if(dados != null) {								
+					$scope.listaAssuntos = dados;																
 				}
 			}
 		);	
