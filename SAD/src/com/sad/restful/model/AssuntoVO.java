@@ -9,6 +9,8 @@ public class AssuntoVO {
 	
 	private String descricao;
 	
+	private Boolean checked;
+	
 	private Long idDisciplina;
 
 	public Long getId() {
@@ -33,6 +35,14 @@ public class AssuntoVO {
 
 	public void setIdDisciplina(Long idDisciplina) {
 		this.idDisciplina = idDisciplina;
+	}
+
+	public Boolean getChecked() {
+		return checked;
+	}
+
+	public void setChecked(Boolean checked) {
+		this.checked = checked;
 	}
 
 	
