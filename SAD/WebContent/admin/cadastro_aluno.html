@@ -4,37 +4,82 @@
 <meta charset="UTF-8">
 <title>Cadastro de Alunos</title>
 </head>
-<body>	
-	<div class="container"> 
+<body>
+	<div class="container">
 
-	<form name="formAssuntos">		
-		<div class="col-md-4"></div>
-		<div class="col-md-4">  
-		<legend><H5>Novo aluno</H5></legend>
-  		<fieldset>  		
-  		<div class="form-group">
-  			<label>Turma</label>			
-  			 <select name="turma" ng-model="aluno.idTurma" class="form-control">  			
-	         <option value="{{turma.id}}" ng-repeat="turma in listaTurmas">
-	         {{turma.codigo}}
-	         </option>
-	     	</select>
-		</div>		
-		<div class="form-group">
-  			<label>Matrícula</label>			
-  			 <input type="text" class="form-control" ng-model="aluno.matricula">			
-		</div>		
-		<div class="form-group">
-  			<label>Nome</label>			
-  			 <input type="text" class="form-control" ng-model="aluno.nome">			
-		</div>			
-		</fieldset>
-			<button ng-click="adicionarAluno()" class="btn btn-primary">Adicionar</span></button>
-        </div>
-                
-	</form>
 
-	</div>	
+		<form name="formAssuntos">
+
+			<div class="col-md-4">
+				<legend>
+					<H5>Novo aluno</H5>
+				</legend>
+				<fieldset>
+					<div class="form-group">
+						<label>Turma</label> <select name="turma" ng-model="aluno.idTurma"
+							class="form-control">
+							<option value="{{turma.id}}" ng-repeat="turma in listaTurmas">
+								{{turma.codigo}}</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label>Importar arquivo</label> <input type="file"
+							file-input="files" custom-on-change="uploadFile" />
+					</div>
+				</fieldset>
+
+			</div>
+
+			<div class="col-md-1"></div>
+
+			<div class="col-md-8">
+				<legend>
+					<H5>Alunos importados</H5>
+				</legend>
+
+
+				<table class="table table-condensed">
+					<thead>
+						<tr>
+							<th>Matrícula</th>
+							<th>Nome</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="aluno in listaAlunos">
+							<td><input type="text" ng-model="aluno.matricula" size="15"
+								class="form-control input-sm"></td>
+							<td><input type="text" ng-model="aluno.nome" size="40"
+								class="form-control input-sm"></td>
+							<td>
+								<button ng-click="excluirAluno(aluno)"
+									class="btn btn-xs btn-danger">
+									<span class="glyphicon glyphicon-minus"></span>
+								</button>
+
+								<button ng-click="adicionarAluno()" ng-show="$last"
+									class="btn btn-xs btn-success">
+									<span class="glyphicon glyphicon-plus"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>				
+
+				<button ng-show="listaAlunos.length > 0" ng-click="gravarAlunos()" class="btn btn-primary">
+					Gravar</span>
+				</button>
+
+			</div>
+
+
+
+
+
+		</form>
+
+	</div>
 </body>
 
 </html>

@@ -1,5 +1,29 @@
 var app = angular.module('sad', ['ngRoute']);
 
+app.directive('fileInput', ['$parse', function($parse) {
+	return {
+		restrict: "A",
+		link:function(scope,elm,attrs) {
+			elm.bind('change', function() {
+				$parse(attrs.fileInput)
+				.assign(scope,elm[0].files)
+				scope.$apply()				
+			})			
+		}
+	}						
+	
+}]);
+
+app.directive('customOnChange', function() {
+	  return {
+	    restrict: 'A',
+	    link: function (scope, element, attrs) {
+	      var onChangeHandler = scope.$eval(attrs.customOnChange);
+	      element.bind('change', onChangeHandler);
+	    }
+	  };
+});
+
 app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.

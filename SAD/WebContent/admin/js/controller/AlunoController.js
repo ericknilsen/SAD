@@ -1,5 +1,6 @@
 app.controller('AlunoController', function($scope, $http) {
 
+	$scope.files = {};
 	$scope.aluno = {};	
 	$scope.listaAlunos = [];
 
@@ -12,18 +13,53 @@ app.controller('AlunoController', function($scope, $http) {
 		}
 	);
 
-
-
-	$scope.adicionarAluno = function() {		
+	$scope.gravarAlunos = function() {		
 		
-		$http.post('http://localhost:8080/SAD/rest/alunos', $scope.aluno).success(
+		$http.post('http://localhost:8080/SAD/rest/alunos', $scope.listaAlunos).success(
 			function(dados) {    	
 				alert(dados);								
-				$scope.aluno = {};
+				$scope.listaAlunos = [];
   			}
   		);
 
+	};	
+	
+	$scope.uploadFile = function(event) {	
+		
+		var files = event.target.files;		
+		
+	    var fd = new FormData();	    
+	 
+	    fd.append("file", files[0]);
+	    fd.append("turma", $scope.aluno.idTurma);
+	    	  	    
+        $http.post('http://localhost:8080/SAD/rest/alunos/f', fd, {	    
+	        withCredentials: true,
+	        headers: {'Content-Type': undefined },
+	        transformRequest: angular.identity}).success(
+	        	function(dados) {    	
+	        		$scope.listaAlunos = dados;
+	        	}
+	        );
 	};
+	
+	$scope.adicionarAluno = function() {	
+		
+		$scope.listaAlunos.push({"idTurma":$scope.aluno.idTurma});
+	};	
+	
+	$scope.excluirAluno = function(aluno) {	
+		
+		remove($scope.listaAlunos,aluno);
+	};	
+	
+	function remove(arr, item) {
+	    for(var i = arr.length; i--;) {
+	        if(arr[i] === item) {
+	            arr.splice(i, 1);
+	        }
+	    }
+	}	
 
 	$scope.removerAluno = function(aluno) {		
 		

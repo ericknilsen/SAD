@@ -1,5 +1,7 @@
 package com.sad.restful.resources;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -14,6 +16,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
+import org.jboss.resteasy.plugins.providers.multipart.MultipartFormDataInput;
 
 import com.sad.bean.service.AlunoBeanRemote;
 import com.sad.entity.Aluno;
@@ -69,9 +75,22 @@ public class AlunoResource {
 	@POST
 	@Consumes("application/json")
 	@Produces("text/plain")
-	public String adicionaAluno(AlunoVO alunoVO) {		
+	public String adicionaAlunos(List<AlunoVO> listaAlunosVO) {
+		
+		for (AlunoVO alunoVO : listaAlunosVO) {
+			alunoBean.inserir(this.montaAluno(alunoVO));
+		}
 				
-		return alunoBean.inserir(this.montaAluno(alunoVO));
+		return "Alunos cadastrados!";
+	}
+	
+	@Path("f")
+	@POST
+	@Consumes("multipart/form-data")	
+	@Produces("application/json")
+	public Collection<AlunoVO> importaAlunos(@MultipartForm FileUploadForm form) {     		
+				
+		return form.getAlunos();
 	}
 	
 	@Path("t/{idTurma}")
