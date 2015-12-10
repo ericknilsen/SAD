@@ -8,7 +8,7 @@
 	<div class="container">
 
 
-		<form name="formAssuntos">
+		<form name="formAlunos">
 
 			<div class="col-md-4">
 				<legend>
@@ -17,13 +17,13 @@
 				<fieldset>
 					<div class="form-group">
 						<label>Turma</label> <select name="turma" ng-model="aluno.idTurma"
-							class="form-control">
+							class="form-control" required>
 							<option value="{{turma.id}}" ng-repeat="turma in listaTurmas">
 								{{turma.codigo}}</option>
-						</select>
+						</select>						
 					</div>
 
-					<div class="form-group">
+					<div ng-show="aluno.idTurma != null" class="form-group">
 						<label>Importar arquivo</label> <input type="file"
 							file-input="files" custom-on-change="uploadFile" />
 					</div>
@@ -48,9 +48,9 @@
 					</thead>
 					<tbody>
 						<tr ng-repeat="aluno in listaAlunos">
-							<td><input type="text" ng-model="aluno.matricula" size="15"
-								class="form-control input-sm"></td>
-							<td><input type="text" ng-model="aluno.nome" size="40"
+							<td><input type="text" ng-model="aluno.matricula" required size="15"
+								class="form-control input-sm"></td>						
+							<td><input type="text" ng-model="aluno.nome" required size="40"
 								class="form-control input-sm"></td>
 							<td>
 								<button ng-click="excluirAluno(aluno)"
@@ -67,15 +67,12 @@
 					</tbody>
 				</table>				
 
-				<button ng-show="listaAlunos.length > 0" ng-click="gravarAlunos()" class="btn btn-primary">
+				<button ng-show="listaAlunos.length > 0" ng-click="gravarAlunos()" class="btn btn-primary"
+				ng-disabled="formAlunos.$error.required">
 					Gravar</span>
 				</button>
 
 			</div>
-
-
-
-
 
 		</form>
 

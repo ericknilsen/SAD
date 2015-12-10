@@ -14,7 +14,7 @@
   		<fieldset>  
   		 <div class="form-group">
   			<label>Semestre</label>			
-  			 <select name="semestre" ng-model="turma.semestre" class="form-control">  			
+  			 <select name="semestre" ng-model="turma.semestre" required class="form-control">  			
 	         <option value="{{s.semestre}}" ng-repeat="s in listaSemestres">
 	         {{s.semestre}}
 	         </option>
@@ -22,14 +22,15 @@
 		</div>				
   		<div class="form-group">
   			<label>Disciplina</label>			
-  			 <select name="disciplina" ng-model="turma.idDisciplina" class="form-control">  			
+  			 <select name="disciplina" ng-model="turma.idDisciplina" required class="form-control">
+  			 <option></option>  			
 	         <option value="{{disciplina.id}}" ng-repeat="disciplina in listaDisciplinas">
 	         {{disciplina.codigo}} - {{disciplina.nome}}
 	         </option>
 	     	</select>
 		</div>						
 		</fieldset>
-			<button ng-click="adicionarTurma()" class="btn btn-primary">Adicionar</span></button>
+			<button ng-click="adicionarTurma()" class="btn btn-primary" ng-disabled="formTurma.$error.required">Adicionar</span></button>
         </div>
                 
 	</form>

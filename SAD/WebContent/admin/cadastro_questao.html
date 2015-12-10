@@ -22,7 +22,7 @@
 	
 		<div class="form-group">
   			<label>Gabarito </label>  						
-  			<select name="gabarito" ng-model="questao.gabarito" class="form-control">  			
+  			<select name="gabarito" ng-model="questao.gabarito" class="form-control" required>  			
 	         <option value="A">Alternativa A</option>
 	         <option value="B">Alternativa B</option>
 	         <option value="C">Alternativa C</option>
@@ -33,7 +33,7 @@
 
   		<div class="form-group">
   			<label>Disciplina </label>  						
-  			<select name="disciplina" ng-model="questao.idDisciplina" class="form-control" ng-change="buscarAssuntosPorDisciplina()">  	
+  			<select name="disciplina" ng-model="questao.idDisciplina" class="form-control" ng-change="buscarAssuntosPorDisciplina()" required>  	
 	         <option value="{{disciplina.id}}" ng-repeat="disciplina in listaDisciplinas">
 	         	{{disciplina.codigo}} - {{disciplina.nome}}
 	         </option>
@@ -47,9 +47,9 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="assunto in listaAssuntos">			
+			<tr ng-repeat="assunto in listaAssuntos" required>			
 				<td>					
-					<input type="checkbox" ng-model="assunto.checked" ng-checked="assunto.checked" value="{{assunto.id}}">
+					<input type="checkbox" ng-model="assunto.checked" ng-checked="assunto.checked" value="{{assunto.id}}" ng-required="!existeAssuntoSelecionado()">
 					{{assunto.descricao}}  
 				</td>				
 			</tr>
@@ -67,23 +67,23 @@
   		<fieldset>
 		<div class="form-group">
   			<label>Alternativa A </label>  			
-			<textarea class="form-control" ng-model="alternativaA.sentenca"> </textarea>						
+			<textarea class="form-control" ng-model="alternativaA.sentenca" required> </textarea>						
   		</div>
 		<div class="form-group">
   			<label>Alternativa B</label>
-			<textarea class="form-control" ng-model="alternativaB.sentenca"> </textarea>
+			<textarea class="form-control" ng-model="alternativaB.sentenca" required> </textarea>
 		</div>
 		<div class="form-group">
   			<label>Alternativa C</label>
-			<textarea class="form-control" ng-model="alternativaC.sentenca"> </textarea>
+			<textarea class="form-control" ng-model="alternativaC.sentenca" required> </textarea>
 		</div>
 		<div class="form-group">
   			<label>Alternativa D</label>
-			<textarea class="form-control" ng-model="alternativaD.sentenca"> </textarea>
+			<textarea class="form-control" ng-model="alternativaD.sentenca" required> </textarea>
 		</div>
 		<div class="form-group">
   			<label>Alternativa E</label>
-			<textarea class="form-control" ng-model="alternativaE.sentenca"> </textarea>
+			<textarea class="form-control" ng-model="alternativaE.sentenca" required> </textarea>
 		</div>				
 		</fieldset>		
         </div>     			       
@@ -94,23 +94,23 @@
 
 		<div class="form-group">
   			<label>Justificativa A</label>
-			<textarea class="form-control" ng-model="alternativaA.justificativa"> </textarea>
+			<textarea class="form-control" ng-model="alternativaA.justificativa" required> </textarea>
 		</div>
 		<div class="form-group">
   			<label>Justificativa B</label>
-			<textarea class="form-control" ng-model="alternativaB.justificativa"> </textarea>
+			<textarea class="form-control" ng-model="alternativaB.justificativa" required> </textarea>
 		</div>
 		<div class="form-group">
   			<label>Justificativa C</label>
-			<textarea class="form-control" ng-model="alternativaC.justificativa"> </textarea>
+			<textarea class="form-control" ng-model="alternativaC.justificativa" required> </textarea>
 		</div>
 		<div class="form-group">
   			<label>Justificativa D</label>
-			<textarea class="form-control" ng-model="alternativaD.justificativa"> </textarea>
+			<textarea class="form-control" ng-model="alternativaD.justificativa" required> </textarea>
 		</div>
 		<div class="form-group">
   			<label>Justificativa E</label>
-			<textarea class="form-control" ng-model="alternativaE.justificativa"> </textarea>
+			<textarea class="form-control" ng-model="alternativaE.justificativa" required> </textarea>
 		</div>		
 
 		</fieldset>
@@ -118,7 +118,7 @@
 
         <div class="col-md-11"></div>      
         <div class="col-md-1"> 
-        <button ng-click="gravarQuestao()" class="btn btn-primary">Gravar</button>        
+        <button ng-click="gravarQuestao()" class="btn btn-primary" ng-disabled="formQuestoes.$error.required">Gravar</button>        
         </div>              
 	</form>
 

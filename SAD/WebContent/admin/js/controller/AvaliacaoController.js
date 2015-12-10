@@ -30,10 +30,16 @@ app.controller('AvaliacaoController', function($scope, $http, $location) {
 			
 	};
 
-//	if($location.search().id) {
-//		$scope.avaliacao.id = $location.search().id;
-//		$scope.buscarQuestoesPorAvaliacao();
-//	}
+	$scope.existeAssuntoSelecionado = function() {
+		
+		for (var i = 0; i < $scope.listaAssuntos.length; i++) {
+			if($scope.listaAssuntos[i].checked) { 				
+				return true;			
+			}	
+		};   
+		
+		return false;
+	}
 
 	$scope.buscarAssuntosPorTurma = function() {
 		

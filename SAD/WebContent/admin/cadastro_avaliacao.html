@@ -14,7 +14,7 @@
   		<fieldset>  		
   		<div class="form-group">
   			<label>Turma</label>			
-  			 <select name="turma" ng-model="avaliacao.idTurma" class="form-control" ng-change="buscarAssuntosPorTurma()">  	
+  			 <select name="turma" ng-model="avaliacao.idTurma" class="form-control" ng-change="buscarAssuntosPorTurma()" required>  	
 	         <option value="{{turma.id}}" ng-repeat="turma in listaTurmas">
 	         {{turma.codigo}}
 	         </option>
@@ -29,12 +29,12 @@
 		<tbody>
 			<tr ng-repeat="assunto in listaAssuntos">			
 				<td>					
-					<input type="checkbox" ng-model="assunto.checked" ng-checked="assunto.checked" value="{{assunto.id}}" ng-click="buscarQuestoesPorAssuntos()">
+					<input type="checkbox" ng-model="assunto.checked" ng-checked="assunto.checked" value="{{assunto.id}}" ng-click="buscarQuestoesPorAssuntos()" ng-required="!existeAssuntoSelecionado()">
 					{{assunto.descricao}}  
 				</td>				
 			</tr>
 			<tr>
-			<td><button ng-click="adicionarAvaliacao()" class="btn btn-primary">Criar
+			<td><button ng-click="adicionarAvaliacao()" class="btn btn-primary" ng-disabled="formAvaliacoes.$error.required">Criar 
 				</button></td>
 			</tr>
 		</tbody>

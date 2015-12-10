@@ -14,7 +14,7 @@
   		<fieldset>  		
   		<div class="form-group">
   			<label>Disciplina</label>			
-  			 <select name="disciplina" ng-model="assunto.idDisciplina" class="form-control">  			
+  			 <select name="disciplina" ng-model="assunto.idDisciplina" class="form-control" required>  			
 	         <option value="{{disciplina.id}}" ng-repeat="disciplina in listaDisciplinas">
 	         {{disciplina.codigo}} - {{disciplina.nome}}
 	         </option>
@@ -22,11 +22,11 @@
 		</div>		
 		<div class="form-group">
   			<label>Descrição</label>			
-  			 <input type="text" class="form-control" ng-model="assunto.descricao">			
+  			 <input type="text" class="form-control" ng-model="assunto.descricao" required>			
 		</div>				
 		</fieldset>
 
-			<button ng-click="adicionarAssunto()" class="btn btn-primary">Adicionar</span></button>
+			<button ng-click="adicionarAssunto()" class="btn btn-primary" ng-disabled="formAssuntos.$error.required">Adicionar</span></button>
         </div>
                 
 	</form>

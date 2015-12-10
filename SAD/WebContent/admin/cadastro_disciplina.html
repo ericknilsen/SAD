@@ -14,15 +14,15 @@
   		<fieldset>  		
   		<div class="form-group">
   			<label>Código</label>			
-  			 <input type="text" class="form-control" ng-model="disciplina.codigo">			
+  			 <input type="text" class="form-control" ng-model="disciplina.codigo" required>			
 		</div>		
 		<div class="form-group">
   			<label>Nome</label>			
-  			 <input type="text" class="form-control" ng-model="disciplina.nome">			
+  			 <input type="text" class="form-control" ng-model="disciplina.nome" required>			
 		</div>				
 		</fieldset>
 
-			<button ng-click="adicionarDisciplina()" class="btn btn-primary">Adicionar</span></button>
+			<button ng-click="adicionarDisciplina()" class="btn btn-primary" ng-disabled="formDisciplinas.$error.required">Adicionar</span></button>
         </div>
 
         <div class="col-md-1"></div>
@@ -40,13 +40,13 @@
 		<tbody>
 			<tr ng-repeat="disciplina in listaDisciplinas">			
 				<td>					
-					<input type="text" ng-model="disciplina.codigo" size="5" class="form-control input-sm">
+					<input type="text" name="codigo" ng-model="disciplina.codigo" size="5" class="form-control input-sm" required>
 				</td>	
 				<td>
-					<input type="text" ng-model="disciplina.nome" size="30" class="form-control input-sm">
+					<input type="text" name="nome" ng-model="disciplina.nome" size="30" class="form-control input-sm" required>
 				</td>
 				<td> 
-					<button ng-click="alterarDisciplina(disciplina)" class="btn btn-xs btn-success">
+					<button ng-click="alterarDisciplina(disciplina)" class="btn btn-xs btn-success" ng-disabled="formDisciplinas.codigo.$error.required || formDisciplinas.nome.$error.required">
 						<span class="glyphicon glyphicon-ok"></span>
 					</button>
 					<button ng-click="removerDisciplina(disciplina)" class="btn btn-xs btn-danger">

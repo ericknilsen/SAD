@@ -36,7 +36,18 @@ app.controller('QuestaoController', function($scope, $http, $location) {
 			}
 		);	
 
-	};	
+	};
+	
+	$scope.existeAssuntoSelecionado = function() {
+		
+		for (var i = 0; i < $scope.listaAssuntos.length; i++) {
+			if($scope.listaAssuntos[i].checked) { 				
+				return true;			
+			}	
+		};   
+		
+		return false;
+	}	
 
 
 	$scope.gravarQuestao = function() {
