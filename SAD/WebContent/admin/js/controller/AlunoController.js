@@ -6,6 +6,8 @@ app.controller('AlunoController', function($scope, $http) {
 
 	$scope.listaTurmas = [];
 	
+	$scope.listaAlunos.push({});
+	
 
 	$http.get('http://localhost:8080/SAD/rest/turmas').success(
 			function(dados) {				
@@ -95,6 +97,34 @@ app.controller('AlunoController', function($scope, $http) {
 		);
 		
 	};
+	
+	
+	$scope.listarAvaliacoesPorAluno = function() {
+		
+		$scope.listaAlunos = [];
+		$http.get('http://localhost:8080/SAD/rest/alunos/t/'+$scope.aluno.idTurma).success(
+			function(dados) {					
+				$scope.listaAlunos = dados;	
+				for (var i = 0; i < $scope.listaAlunos.length; i++) {
+					$scope.listarAvaliacoes(i)				
+				}	
+			}
+		);	
+		
+		
+	};
+	
+	$scope.listarAvaliacoes = function(i) {	
+			
+		$http.get('http://localhost:8080/SAD/rest/avaliacoes/t/'+$scope.aluno.idTurma+'/'+$scope.listaAlunos[i].id).success(
+				function(dados) {				
+					$scope.listaAlunos[i].listaAvaliacoes = dados;								
+				}					
+		);		
+			
+	};
+
+
 
 
 	$scope.buscarAlunosPorTurma = function() {
@@ -102,7 +132,7 @@ app.controller('AlunoController', function($scope, $http) {
 		$scope.listaAlunos = [];
 		$http.get('http://localhost:8080/SAD/rest/alunos/t/'+$scope.aluno.idTurma).success(
 			function(dados) {					
-				$scope.listaAlunos = dados;
+				$scope.listaAlunos = dados;				
 			}
 		);	
 	};

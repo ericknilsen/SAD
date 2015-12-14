@@ -63,6 +63,10 @@ app.config(['$routeProvider',
         templateUrl: 'busca_aluno.html',
         controller: 'AlunoController'
       }).
+      when('/rendimento_aluno', {
+          templateUrl: 'rendimento_aluno.html',
+          controller: 'AlunoController'
+      }).
       when('/cadastro_avaliacao', {
         templateUrl: 'cadastro_avaliacao.html',
         controller: 'AvaliacaoController'
