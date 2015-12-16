@@ -34,12 +34,12 @@
 			<tr>				
 				<th>Turma</th>
 				<th>Matrícula</th>				
-				<th>Nome</th>
+				<th>Nome</th>				
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="aluno in listaAlunos">			
-				<td>
+				<td width="40%">
 					<select name="turma" ng-model="aluno.idTurma" class="form-control input-sm">  			
 	         		<option value="{{turma.id}}" ng-selected="{{turma.id==aluno.idTurma}}" ng-repeat="turma in listaTurmas">
 	         		{{turma.codigo}}
@@ -47,16 +47,14 @@
 	     			</select>					
 				</td>
 				<td>				
-					<input type="text" ng-model="aluno.matricula" size="15" class="form-control input-sm">
-				</td>
+					<input type="text" ng-model="aluno.matricula" size="10" class="form-control input-sm">
+				</td>	
 				<td>				
-					<input type="text" ng-model="aluno.nome" size="40" class="form-control input-sm">
+					<input type="text" ng-model="aluno.nome" size="30" class="form-control input-sm">
 				</td>
 				<td> 
-					<button ng-click="alterarAluno(aluno)" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-ok"></span></button>
-				</td>	
-				<td>
-					<button ng-click="removerAluno(aluno)" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-remove"></span></button>					
+					<button ng-click="alterarAluno(aluno)" class="btn btn-xs btn-success"><span class="glyphicon glyphicon-ok"></span></button>			
+					<button ng-click="removerAluno(aluno)" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-trash"></span></button>					
 				</td>
 			</tr>
 		</tbody>
