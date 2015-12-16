@@ -55,7 +55,7 @@ public class Avaliacao implements Serializable {
 		
 	public Avaliacao() {				
 		this.status = Constantes.STATUS_AVALIACAO_ABERTA;
-		this.dataCriacao = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(new Date()).toString();
+		this.dataCriacao = new SimpleDateFormat("dd/MM/yyyy").format(new Date()).toString();
 	}
 
 	public Integer getStatus() {
