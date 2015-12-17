@@ -120,4 +120,15 @@ public class AvaliacaoDAO {
 		
 	}
 
+
+	public List<Avaliacao> buscarRendimentoMedioAvaliacaoPorTurma(
+			Long idTurma) {
+		
+		String query = "SELECT a FROM Avaliacao a WHERE a.turma.id="+idTurma;		
+		
+		return manager.createQuery(query).getResultList();
+	}
+	
+	
+
 }

@@ -29,6 +29,8 @@ public interface AvaliacaoBeanRemote {
 	Avaliacao buscaAvaliacaoAtualPorTurmaAluno(Long idTurma);
 
 	Avaliacao buscaAvaliacao(Long idAvaliacao);
+
+	Collection<Double> buscarRendimentoMedioAvaliacaoPorTurma(Long idTurma);
 	
 	
 			

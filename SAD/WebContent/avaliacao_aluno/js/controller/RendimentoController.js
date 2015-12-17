@@ -29,13 +29,14 @@ app.controller('RendimentoController', function($scope, $http, $cookies,
 	};
 
 	$scope.aluno = {};	
+	$scope.listaRendimentos = [];
 
 	$scope.listarAvaliacoesPorTurmaAluno = function() {
 
 		$http.get(
 				'http://' + $rootScope.ip + ':8080/SAD/rest/alunos/'
 						+ $cookies.get('idAluno')).success(function(dados) {
-			$scope.aluno = dados;
+			$scope.aluno = dados;			
 			$scope.listarAvaliacoesPorTurma();
 		});
 
@@ -48,6 +49,18 @@ app.controller('RendimentoController', function($scope, $http, $cookies,
 						+ $scope.aluno.idTurma + '/' + $scope.aluno.id)
 				.success(function(dados) {
 					$scope.listaAvaliacoes = dados;
+					$scope.listarRendimentoMedioPorTurma();
+				});
+
+	};
+	
+	$scope.listarRendimentoMedioPorTurma = function() {
+
+		$http.get(
+				'http://' + $rootScope.ip + ':8080/SAD/rest/avaliacoes/rt/'
+						+ $scope.aluno.idTurma)
+				.success(function(dados) {
+					$scope.listaRendimentos = dados;	
 					$scope.gerarGraficoRendimento();
 				});
 
@@ -59,11 +72,11 @@ app.controller('RendimentoController', function($scope, $http, $cookies,
 		var avaliacoes = [];
 		for (var i = 0; i < $scope.listaAvaliacoes.length; i++) {		
 			 rendimentoAluno.push(parseFloat($scope.listaAvaliacoes[i].rendimento));
-			 avaliacoes.push($scope.listaAvaliacoes[i].dataCriacao);
-			 
+			 avaliacoes.push($scope.listaAvaliacoes[i].dataCriacao);			 
 		}
 
-		data.datasets[0].data = rendimentoAluno;
+		data.datasets[0].data = rendimentoAluno;		
+		data.datasets[1].data = $scope.listaRendimentos;
 		data.labels = avaliacoes;
 		
 		var ctx = document.getElementById("grafico").getContext("2d");
@@ -72,6 +85,8 @@ app.controller('RendimentoController', function($scope, $http, $cookies,
 
 		document.getElementById("legenda").innerHTML = lineChart.generateLegend();
 	}
+	
+	
 
 	$scope.listarAvaliacoesPorTurmaAluno();
 

@@ -146,6 +146,15 @@ public class AvaliacaoResource {
 						
 		return this.montaListaAvaliacoesVO(avaliacaoBean.buscarAvaliacoesPorTurma(idTurma));
 	}
+	
+	
+	@Path("rt/{idTurma}")
+	@GET
+	@Produces("application/json")
+	public Collection<Double> buscaRendimentoMedioAvaliacaoPorTurma(@PathParam("idTurma") Long idTurma) {						
+						
+		return avaliacaoBean.buscarRendimentoMedioAvaliacaoPorTurma(idTurma);
+	}
 
 	
 	@Path("turma_aluno/{idTurma}")

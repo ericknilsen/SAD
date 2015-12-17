@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 
 import com.sad.entity.Alternativa;
+import com.sad.entity.Aluno;
 import com.sad.entity.Assunto;
 import com.sad.entity.Avaliacao;
 import com.sad.entity.Questao;
@@ -77,10 +78,6 @@ public class QuestaoDAO {
 				
 		List<Assunto> listaAssuntos = questao.getListaAssuntos();
 		
-//		Long idDisciplina = listaAssuntos.get(0).getDisciplina().getId();
-//		
-//		List<Questao> listaQuestoes = manager.createQuery("SELECT q FROM Questao q WHERE q.disciplina.id="+idDisciplina).getResultList();
-		
 		List<Questao> listaQuestoes = manager.createQuery("SELECT q FROM Questao q").getResultList();
 		
 		Collection<Questao> listaQuestoesPorDisciplinaAssuntos = new ArrayList<Questao>();
@@ -99,30 +96,7 @@ public class QuestaoDAO {
 		}				
 		
 		return listaQuestoesPorDisciplinaAssuntos;
-	}		
-	
-//	@SuppressWarnings("unchecked")
-//	public List<Questao> buscarQuestoesPorAvaliacao(Long idAvaliacao) {
-//		
-//		Avaliacao avaliacao =  manager.find(Avaliacao.class, idAvaliacao);		
-//		
-//		List<Questao> listaQuestoesPorDisciplina = manager.createQuery("SELECT q FROM Questao q WHERE q.disciplina.id="+avaliacao.getTurma().getDisciplina().getId()).getResultList();
-//		
-//		List<Questao> listaQuestoesPorAssunto = new ArrayList<Questao>();
-//		for (Questao questao : listaQuestoesPorDisciplina) {			
-//			int cont = 0;
-//			for (Assunto assuntoQuestao : questao.getListaAssuntos()) {				
-//				for (Assunto assuntoAvaliacao : avaliacao.getListaAssuntos()) 
-//					if(assuntoQuestao.getId().equals(assuntoAvaliacao.getId())) {					
-//						++cont;						
-//					}				
-//			}
-//			if(cont == questao.getListaAssuntos().size()) 
-//				listaQuestoesPorAssunto.add(questao);
-//		}	
-//						
-//		return listaQuestoesPorAssunto;
-//	}	
+	}
 	
 	@SuppressWarnings("unchecked")
 	private Boolean existeRespostaAvaliacao(Long idAvaliacao, Long idAluno) {
@@ -132,15 +106,15 @@ public class QuestaoDAO {
 		return listaRespostaQuestao.size() > 0;
 	}
 	
-	private Questao atualizaQuestao(Long idAvaliacao, Long idAluno, Questao questao) {
+	
+    private Questao atualizaQuestao(Long idAvaliacao, Long idAluno, Questao questao) {
 		
 		RespostaQuestao respostaQuestao = (RespostaQuestao) manager.createQuery("SELECT rq FROM RespostaQuestao rq WHERE rq.avaliacao.id="+idAvaliacao+" AND rq.aluno.id="+idAluno+" AND rq.questao.id="+questao.getId()).getSingleResult();
 		questao.setIdAlternativaResposta(respostaQuestao.getAlternativaResposta().getId());
 		
 		return questao;
-	}	
+	}
 
-	@SuppressWarnings("unchecked")
 	public List<Questao> buscarQuestoesPorAvaliacao(Long idAvaliacao, Long idAluno) {
 		
 		Avaliacao avaliacao =  manager.find(Avaliacao.class, idAvaliacao);
@@ -153,31 +127,7 @@ public class QuestaoDAO {
 		}
 						
 		return listaQuestoes;
-	}	
-	
-	
-
-//	@SuppressWarnings("unchecked")
-//	public List<Questao> buscarQuestoesPorAvaliacao(Long idAvaliacao) {
-//		
-//		Avaliacao avaliacao =  manager.find(Avaliacao.class, idAvaliacao);		
-//		
-//		List<Questao> listaQuestoesPorDisciplina = manager.createQuery("SELECT q FROM Questao q WHERE q.disciplina.id="+avaliacao.getTurma().getDisciplina().getId()).getResultList();
-//		List<Questao> listaQuestoesPorAvaliacao = new ArrayList<Questao>();
-//		for (Questao questao : listaQuestoesPorDisciplina) {
-//			boolean achouAvaliacao = false;
-//			for (Avaliacao avaliacaoQuestao : questao.getListaAvaliacoes()) {
-//				if(avaliacaoQuestao.getId().equals(idAvaliacao)) {
-//					achouAvaliacao = true;
-//				}					
-//			}
-//			if(achouAvaliacao)
-//				listaQuestoesPorAvaliacao.add(questao);	
-//		}	
-//	
-//						
-//		return listaQuestoesPorAvaliacao;
-//	}		
+	}
 	
 	public String remover(Long id) {
 		
